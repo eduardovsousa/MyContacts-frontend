@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 import {
   Card, Container, InputSearchContainer, Header, ListContainer,
 } from './styles';
@@ -14,8 +16,8 @@ export default function Home() {
       </InputSearchContainer>
 
       <Header>
-        <strong>3 contatos</strong>
-        <a href="/">Novo contato</a>
+        <strong>1 contato</strong>
+        <Link to="/new">Novo contato</Link>
       </Header>
 
       <ListContainer>
@@ -25,64 +27,27 @@ export default function Home() {
             <img src={arrow} alt="Arrow" />
           </button>
         </header>
-        <Card>
-          <div className="info">
-            <div className="contact-name">
-              <strong>Eduardo Varela</strong>
-              <small>instagram</small>
-            </div>
-            <span>eduardo@dev.com.br</span>
-            <span>(11) 99999-9999</span>
-          </div>
-
-          <div className="actions">
-            <a href="/">
-              <img src={edit} alt="Edit" />
-            </a>
-            <button type="button">
-              <img src={trash} alt="Trash" />
-            </button>
-          </div>
-        </Card>
-        <Card>
-          <div className="info">
-            <div className="contact-name">
-              <strong>Eduardo Varela</strong>
-              <small>instagram</small>
-            </div>
-            <span>eduardo@dev.com.br</span>
-            <span>(11) 99999-9999</span>
-          </div>
-
-          <div className="actions">
-            <a href="/">
-              <img src={edit} alt="Edit" />
-            </a>
-            <button type="button">
-              <img src={trash} alt="Trash" />
-            </button>
-          </div>
-        </Card>
-        <Card>
-          <div className="info">
-            <div className="contact-name">
-              <strong>Eduardo Varela</strong>
-              <small>instagram</small>
-            </div>
-            <span>eduardo@dev.com.br</span>
-            <span>(11) 99999-9999</span>
-          </div>
-
-          <div className="actions">
-            <a href="/">
-              <img src={edit} alt="Edit" />
-            </a>
-            <button type="button">
-              <img src={trash} alt="Trash" />
-            </button>
-          </div>
-        </Card>
       </ListContainer>
+
+      <Card>
+        <div className="info">
+          <div className="contact-name">
+            <strong>Eduardo Varela</strong>
+            <small>instagram</small>
+          </div>
+          <span>eduardo@dev.com.br</span>
+          <span>(11) 99999-9999</span>
+        </div>
+
+        <div className="actions">
+          <Link to="/edit/123">
+            <img src={edit} alt="Edit" />
+          </Link>
+          <button type="button">
+            <img src={trash} alt="Delete" />
+          </button>
+        </div>
+      </Card>
     </Container>
   );
 }

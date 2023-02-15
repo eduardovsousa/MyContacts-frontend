@@ -19,7 +19,14 @@ export default function ContactForm({ buttonLabel }) {
   const [phone, setPhone] = useState('');
   const [category, setCategory] = useState('');
 
-  const { setError, removeError, getErrorMessageByFieldName } = useErrors();
+  const {
+    errors,
+    setError,
+    removeError,
+    getErrorMessageByFieldName,
+  } = useErrors();
+
+  const isFormValid = (name && phone && errors.length === 0);
 
   function handleNameChange(event) {
     setName(event.target.value);
@@ -43,6 +50,12 @@ export default function ContactForm({ buttonLabel }) {
 
   function handlePhoneChange(event) {
     setPhone(formatPhone(event.target.value));
+
+    if (!event.target.value) {
+      setError({ field: 'phone', message: 'Telefone é obrigatório.' });
+    } else {
+      removeError('phone');
+    }
   }
 
   function handleSubmit(event) {
@@ -59,7 +72,7 @@ export default function ContactForm({ buttonLabel }) {
       <FormGroup error={getErrorMessageByFieldName('name')}>
         <Input
           error={getErrorMessageByFieldName('name')}
-          placeholder="Nome"
+          placeholder="Nome *"
           value={name}
           onChange={handleNameChange}
         />
@@ -75,9 +88,11 @@ export default function ContactForm({ buttonLabel }) {
         />
       </FormGroup>
 
-      <FormGroup>
+      <FormGroup error={getErrorMessageByFieldName('phone')}>
         <Input
-          placeholder="Telefone"
+          type="phone"
+          error={getErrorMessageByFieldName('phone')}
+          placeholder="Telefone *"
           value={phone}
           onChange={handlePhoneChange}
           maxLength="15"
@@ -96,7 +111,7 @@ export default function ContactForm({ buttonLabel }) {
       </FormGroup>
 
       <ButtonContainer>
-        <Button type="submit">
+        <Button type="submit" disabled={!isFormValid}>
           {buttonLabel}
         </Button>
       </ButtonContainer>
